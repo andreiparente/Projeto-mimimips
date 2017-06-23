@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Created by Guilherme Cruz Freitas on 22/06/17.
  */
-public class ConjuntoResgistradores {
+public class ConjuntoRegistradores {
 
     /**conjunto de todos os 32 registradores, feito com vetor ao invés de arraylist pois o número do registrador
      * será seu indice
@@ -63,7 +63,7 @@ public class ConjuntoResgistradores {
 
 
     /*protected HashMap<String, Registrador> registradorMap;
-    public ConjuntoResgistradores() {
+    public ConjuntoRegistradores() {
         registradorMap = new HashMap<>();
 
         registradorMap.put("$zero", new Registrador("$zero", 0, 0));
