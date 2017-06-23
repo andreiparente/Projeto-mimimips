@@ -8,23 +8,25 @@ import com.sun.javafx.fxml.expression.BinaryExpression;
 public class Interpretador{
 
     /**
-     * chegar em casa, lembrar de transformar a palavra nos devidos setores verificando o tipo da instrução, ento, usa os shifts para colocar cada coisa no lugar
+     * função que ira receber uma palavra (000101010101 etc) como um inteiro, e ira: separar op para decidir qual bloco de funções
+     * seguir de acordo com o tipo da palavra, então, separar os registradores e chamar a função de acordo com a func no caso de palavra R
+     * ou com base no op de acordo com o tipo de palavra
      */
-    public int palavra;
 
-    public void interpretar(int palavra)
+    public static void interpretar(int palavra)
     {
-        int a = palavra;
-        if(a >> 26 == 0)//verifica se a palavra é tipo R
-        {
-            int function = palavra & 31;
+        int op = Operacoes.getOp(palavra);
 
-            switch(function){
-                case 1:
-                    Operacoes.add();
+        if (op == 0)
+        {
+            int func = Operacoes.getFunc(palavra);
+
+            switch(func)
+            {
+                case 32:
+                    Operacoes.add(Operacoes.getRs(palavra), Operacoes.getRt(palavra), Operacoes.getRd(palavra));
             }
         }
-
     }
 
 
