@@ -13,7 +13,7 @@ public class Interpretador{
      * ou com base no op de acordo com o tipo de palavra
      */
 
-    public static void interpretar(int palavra)
+    public void interpretar(int palavra)
     {
         int op = Operacoes.getOp(palavra);
 

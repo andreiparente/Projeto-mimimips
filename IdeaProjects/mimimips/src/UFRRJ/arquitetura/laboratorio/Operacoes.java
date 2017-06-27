@@ -39,7 +39,7 @@ public class Operacoes {
     public static int getOp(int palavra)
     {
         int op = palavra >> 26;
-        op = op & 31;
+        op = op & 63;
         return op;
 
     }

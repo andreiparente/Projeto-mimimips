@@ -7,13 +7,13 @@ import java.util.HashMap;
  */
 public class ConjuntoRegistradores {
 
-    /**conjunto de todos os 32 registradores, feito com vetor ao invés de arraylist pois o número do registrador
+    /**
+     * conjunto de todos os 32 registradores, feito com vetor ao invés de arraylist pois o número do registrador
      * será seu indice
      */
 
 
-
-    public static Registrador[] Registradores={
+    public static Registrador[] Registradores = {
             new Registrador("$zero", 0, 0),
             new Registrador("$at", 1, 0),
             new Registrador("$v0", 2, 0),
@@ -99,28 +99,34 @@ public class ConjuntoRegistradores {
         registradorMap.put("$fp", new Registrador("$fp", 30, 0));
         registradorMap.put("$ra", new Registrador("$ra", 31, 0));
     }*/
-
-    public static void setValorRegistrador(String nome, int valor)
-    {
-        if(Registradores[0].getNome().equals(nome)  || Registradores[1].getNome().equals(nome)) {
+    public static void setValorRegistrador(String nome, int valor) {
+        if (Registradores[0].getNome().equals(nome) || Registradores[1].getNome().equals(nome)) {
 
         }
 
-        for(int i = 2; i<32; i++)
-        {
+        for (int i = 2; i < 32; i++) {
 
-            if(Registradores[i].getNome().equals(nome))
-            {
+            if (Registradores[i].getNome().equals(nome)) {
                 Registradores[i].setValor(valor);
                 break;
             }
         }
     }
 
+    public static Registrador getRegistrador(String nome) {
+        int i;
+        for (i = 0; i < 32; i++) {
+            if (ConjuntoRegistradores.Registradores[i].getNome().equals(nome))
+                break;
+        }
 
-
-
-
-
+        return(ConjuntoRegistradores.Registradores[i]);
+    }
 
 }
+
+
+
+
+
+
