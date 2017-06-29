@@ -51,6 +51,43 @@ public class Montador
         map.put("$fp", 30);
         map.put("$ra", 31);
         map.put("pc", 32);
+        map.put("addu",33);
+        map.put("sub",34);
+        map.put("subu",35);
+        map.put("mul",24);
+        map.put("mulu",25);
+        map.put("div",26);
+        map.put("divu",27);
+        map.put("slt",42);
+        map.put("sltu",43);
+        map.put("and",36);
+        map.put("or",37);
+        map.put("nor",39);
+        map.put("xor", 40);
+        map.put("addi",8);//tipo i
+        map.put("aslti",10);
+        map.put("andi",12);
+        map.put("lw",35);
+        map.put("sw",43);
+        map.put("lbu",36);
+        map.put("lb",32);
+        map.put("sb",40);
+        map.put("lui",15);
+        map.put("beq",4);
+        map.put("bne",5);
+        map.put("blez",6);
+        map.put("bgtz",7);
+        map.put("bltz",1);
+        map.put("j",2);// formato j
+        map.put("jal",3);
+        map.put("jr",8);//formato R
+        map.put("jalr",9);
+        map.put("nop",0);
+        map.put("mfhi",16);
+        map.put("mflo",18);
+        map.put("mfepc",16);//Formato R com valor no op e func 0
+        map.put("mfco",16);//Formato R com valor no op e func 0
+
         //todo terminar todos os hashs de função
 
     }
