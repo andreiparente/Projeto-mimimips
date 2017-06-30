@@ -5,12 +5,16 @@ package UFRRJ.arquitetura.laboratorio;
  */
 public class Operacoes {
 
+
+
     /**
      * conjunto de funções utilizadas ara retirar os devidos campos das palavras
      * *********************faltando adress******************
      *
      *
      */
+
+
 
     public static int getRs(int palavra)
     {

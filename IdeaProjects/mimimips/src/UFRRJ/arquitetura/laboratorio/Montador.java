@@ -92,7 +92,7 @@ public class Montador
 
     }
 
-    protected int montar(String teste)
+    protected void montar(String teste)
     {
         StringTokenizer st = new StringTokenizer(teste," ,");
         int[] padraoBinario = new int[32];
@@ -114,17 +114,10 @@ public class Montador
             }
         }
 
-        int expoente = 31;
-        for(int i = 0; i<32; i++)
-        {
+        Utilidade.desBinarizerWord(palavra,padraoBinario);
+        Memoria.memWord.add(palavra);
 
-            if(padraoBinario[i] > 0)
-            {
-                palavra += Math.pow(2,expoente);
-            }
-            expoente--;
-        }
-        return (palavra);
+
     }
 
 }

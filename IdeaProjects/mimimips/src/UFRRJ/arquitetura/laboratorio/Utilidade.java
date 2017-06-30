@@ -20,4 +20,15 @@ public class Utilidade{
                 padraoBinario[i] = 0;
         }
     }
+
+    public static void desBinarizerWord(int palavra, int[] padraoBinario) {
+        int expoente = 31;
+        for (int i = 0; i < 32; i++) {
+
+            if (padraoBinario[i] > 0) {
+                palavra += Math.pow(2, expoente);
+            }
+            expoente--;
+        }
+    }
 }

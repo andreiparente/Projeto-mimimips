@@ -2,6 +2,8 @@ package UFRRJ.arquitetura.laboratorio;
 
 import com.sun.javafx.fxml.expression.BinaryExpression;
 
+import static UFRRJ.arquitetura.laboratorio.Memoria.memWord;
+
 /**
  * Created by windows on 22/06/17.
  */
@@ -13,19 +15,33 @@ public class Interpretador{
      * ou com base no op de acordo com o tipo de palavra
      */
 
-    public void interpretar(int palavra)
-    {
-        int op = Operacoes.getOp(palavra);
+    public void interpretar()
+    {   int palavra;
 
-        if (op == 0)
+        if(Memoria.memWord.size()!=0)//se houver itens adicionados a memória
         {
-            int func = Operacoes.getFunc(palavra);
-
-            switch(func)
+            while(Memoria.index <= Memoria.memWord.size()) //enquanto tiver coisa na memoria
             {
-                case 32:
-                    Operacoes.add(Operacoes.getRs(palavra), Operacoes.getRt(palavra), Operacoes.getRd(palavra));
+
+                palavra = Memoria.memWord.get(Memoria.index);
+
+                int op = Operacoes.getOp(palavra);
+
+                if (op == 0) {
+                    int func = Operacoes.getFunc(palavra);
+
+                    switch (func) {
+                        case 32:
+                            Operacoes.add(Operacoes.getRs(palavra), Operacoes.getRt(palavra), Operacoes.getRd(palavra));
+                    }
+                }
+
+
+                Memoria.index++;//passa para o próximo item da memoria
+                // tá uma merda -- victor
             }
+
+
         }
     }
 
