@@ -18,9 +18,7 @@ public class Interpretador{
     public void interpretar()
     {   int palavra;
 
-        if(Memoria.memWord.size()!=0)//se houver itens adicionados a memória
-        {
-            while(Memoria.index <= Memoria.memWord.size()) //enquanto tiver coisa na memoria
+            while(Memoria.index < Memoria.memWord.size()) //enquanto tiver coisa na memoria
             {
 
                 palavra = Memoria.memWord.get(Memoria.index);
@@ -40,9 +38,6 @@ public class Interpretador{
                 Memoria.index++;//passa para o próximo item da memoria
                 // tá uma merda -- victor
             }
-
-
-        }
     }
 
 

@@ -9,17 +9,20 @@ public class Main {
 
         String teste = "add $t2, $t1, $t0";
 
-        Montador montador = new Montador(teste);
+        Montador montador = new Montador();
+        montador.montar(teste);
+        teste = "add $t2, $t2, $t0";
+        montador.montar(teste);
         Interpretador interpretador = new Interpretador();
 
         ConjuntoRegistradores.Registradores[8].setValor(2);
         ConjuntoRegistradores.Registradores[9].setValor(2);
 
 
-        interpretador.interpretar(montador.montar(teste));
+        interpretador.interpretar();
         System.out.println(ConjuntoRegistradores.Registradores[10].getValor());
 
-        System.out.println(montador.montar(teste));
+        System.out.println();
 
 
 

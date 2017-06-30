@@ -11,7 +11,7 @@ public class Montador
 {
     HashMap<String,Integer> map = new HashMap<>();//inicializa o hashmap
 
-    public Montador(String teste) {//construtor que inicializa
+    public Montador() {//construtor que inicializa
         this.mapStart();
     }
 
@@ -114,7 +114,7 @@ public class Montador
             }
         }
 
-        Utilidade.desBinarizerWord(palavra,padraoBinario);
+        palavra = Utilidade.desBinarizerWord(palavra,padraoBinario);
         Memoria.memWord.add(palavra);
 
 
