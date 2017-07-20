@@ -94,29 +94,30 @@ public class Montador
 
     protected void montar(String teste)
     {
-        StringTokenizer st = new StringTokenizer(teste," ,");
-        int[] padraoBinario = new int[32];
+        StringTokenizer st = new StringTokenizer(teste," ,'\n'");
+        while(st.hasMoreTokens()) {
 
-        int palavra = 0;
 
-        switch(st.nextToken())
-        {
-            case "add":
-            {
-                Utilidade.binarizer(0,padraoBinario,0,5);
-                int aux = map.get(st.nextToken());
-                Utilidade.binarizer(6,padraoBinario,map.get(st.nextToken()),10);
-                Utilidade.binarizer(11,padraoBinario,map.get(st.nextToken()),15);
-                Utilidade.binarizer(16,padraoBinario,aux,20);
-                Utilidade.binarizer(21,padraoBinario,0,25);
-                Utilidade.binarizer(26,padraoBinario,32,31);
+            int[] padraoBinario = new int[32];
 
+            int palavra = 0;
+
+            switch (st.nextToken()) {
+                case "add": {
+                    Utilidade.binarizer(0, padraoBinario, 0, 5);
+                    int aux = map.get(st.nextToken());
+                    Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                    Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                    Utilidade.binarizer(16, padraoBinario, aux, 20);
+                    Utilidade.binarizer(21, padraoBinario, 0, 25);
+                    Utilidade.binarizer(26, padraoBinario, 32, 31);
+
+                }
             }
+
+            palavra = Utilidade.desBinarizerWord(palavra, padraoBinario);
+            Memoria.memWord.add(palavra);
         }
-
-        palavra = Utilidade.desBinarizerWord(palavra,padraoBinario);
-        Memoria.memWord.add(palavra);
-
 
     }
 
