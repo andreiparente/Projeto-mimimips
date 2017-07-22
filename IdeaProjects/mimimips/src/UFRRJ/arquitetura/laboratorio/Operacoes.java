@@ -79,7 +79,7 @@ public class Operacoes {
     ///////
     /////// UNIDADE DE ARITMÉTICA LÓGICA ///////
     ///////
-    public static void add(int rs, int rt, int rd)//op 0, funct 32
+    public static void add(int rs, int rt, int rd)//op 0, funct 32///FUNCIONANDO
     {
 
          ConjuntoRegistradores.Registradores[rd].setValor(ConjuntoRegistradores.Registradores[rs].getValor() +
@@ -91,7 +91,7 @@ public class Operacoes {
 
 
 
-    public static void addi(int rs, int rt, int imediato)//op 8
+    public static void addi(int rs, int rt, int imediato)//op 8//FUNCIONANDO
     {
         ConjuntoRegistradores.Registradores[rt].setValor(ConjuntoRegistradores.Registradores[rs].getValor() +
                 imediato);
@@ -101,7 +101,7 @@ public class Operacoes {
 
 
 
-    public static void addiu(int rs, int rt, int imediato)//op 9
+    public static void addiu(int rs, int rt, int imediato)//op 9//FUNCIONANDO
     {
         ConjuntoRegistradores.Registradores[rt].setValor(ConjuntoRegistradores.Registradores[rs].getValor() +
                 imediato);
@@ -111,7 +111,7 @@ public class Operacoes {
 
 
 
-    public static void addu(int rs, int rt, int rd)//op 0, funct 33
+    public static void addu(int rs, int rt, int rd)//op 0, funct 33//FUNCIONANDO
     {
         ConjuntoRegistradores.Registradores[rd].setValor(ConjuntoRegistradores.Registradores[rs].getValor() +
                 ConjuntoRegistradores.Registradores[rt].getValor());
@@ -121,7 +121,7 @@ public class Operacoes {
 
 
 
-    public static void and(int rs, int rt, int rd)//op 0, funct 36
+    public static void and(int rs, int rt, int rd)//op 0, funct 36//FUNCIONANDO
     {
         ConjuntoRegistradores.Registradores[rd].setValor(ConjuntoRegistradores.Registradores[rs].getValor() &
                 ConjuntoRegistradores.Registradores[rt].getValor());
@@ -131,7 +131,7 @@ public class Operacoes {
 
 
 
-    public static void andi(int rs, int rt, int imediato)//op 12
+    public static void andi(int rs, int rt, int imediato)//op 12//FUNCIONANDO
     {
         ConjuntoRegistradores.Registradores[rt].setValor(ConjuntoRegistradores.Registradores[rs].getValor() &
                 imediato);
@@ -141,7 +141,7 @@ public class Operacoes {
 
 
 
-    public static void lui(int rt, int imediato)//op 15
+    public static void lui(int rt, int imediato)//op 15//FUNCIONANDO
     {
         ConjuntoRegistradores.Registradores[rt].setValor(imediato << 16);
 
