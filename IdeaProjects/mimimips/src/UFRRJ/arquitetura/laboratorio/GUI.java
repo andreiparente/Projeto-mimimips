@@ -8,9 +8,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GUI {
     private JTextArea campoDeCodigo;
-    private JButton button1;
+    private JButton compilar;
     private JPanel Janela;
     private JTable Registradores;
+    private JTabbedPane tabbedPane1;
+    private JPanel Código;
+    private JTable table1;
     private Montador montador;
     Interpretador interpretador;
 
@@ -23,6 +26,7 @@ public class GUI {
     }
 
     public GUI() {
+
 
         montador = new Montador();
         interpretador = new Interpretador();
@@ -37,12 +41,13 @@ public class GUI {
 
         Registradores.setModel(res);
 
-        button1.addActionListener(e -> {
+        compilar.addActionListener(e -> {
             String teste;
             teste = campoDeCodigo.getText();//pega toodo o texto e manda para uma string a ser tokenizada e jogada no montador
             montador.montar(teste);//monta e joga na memoria
             interpretador.interpretar();//pega na memoria e interpreta
             System.out.println(ConjuntoRegistradores.Registradores[10].getValor());//printa no terminal, é provisório, apenas para acompanharmos como está indo
+
             while(res.getRowCount()>0){
                 res.removeRow(0);}
             for (int index = 0; index < 35; index++)

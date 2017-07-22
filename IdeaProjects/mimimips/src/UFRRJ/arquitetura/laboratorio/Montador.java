@@ -103,7 +103,8 @@ public class Montador
             int palavra = 0;
 
             switch (st.nextToken()) {//le o token
-                case "add": {
+
+                case "add" : {
                     Utilidade.binarizer(0, padraoBinario, 0, 5);//começa a preencher o vetor padrão binario
                     Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
                     Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);//busca no mapa através da string do token, então pega o valor atribuido e "binariza" no vetor
