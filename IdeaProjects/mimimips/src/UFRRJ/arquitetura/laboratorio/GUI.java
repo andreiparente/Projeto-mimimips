@@ -1,9 +1,12 @@
 package UFRRJ.arquitetura.laboratorio;
+import java.io.FileOutputStream;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +25,8 @@ public class GUI {
     private Montador montador;
     Interpretador interpretador;
 
+
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("GUI");
         frame.setContentPane(new GUI().Janela);
@@ -33,6 +38,7 @@ public class GUI {
     public GUI() {
 
 
+
         montador = new Montador();
         interpretador = new Interpretador();
         String[] colunas = {"Registrador","Número","Valor"};
@@ -41,6 +47,8 @@ public class GUI {
         DefaultTableModel dataMem = new DefaultTableModel();
         regis.setColumnIdentifiers(colunas);
         dataMem.setColumnIdentifiers(colunasMem);
+
+
 
 
         DataMem.setModel(dataMem);
@@ -63,6 +71,8 @@ public class GUI {
         dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
         dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
         dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+
+
 
 
 
@@ -112,7 +122,7 @@ public class GUI {
                 Memoria.memValor[index] = 0;
             }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            Memoria.memWord.clear();
+            //Memoria.memWord.clear();
 
         });
 
@@ -123,27 +133,34 @@ public class GUI {
             montador.montar(teste);//monta e joga na memoria
             interpretador.interpretar();//pega na memoria e interpreta
 
+
             long padraoBinario[] = new long[32];
 
-            for(Long mem : Memoria.memWord)
+            try
             {
-                Utilidade.binarizer(0,padraoBinario,mem,31);
-                for(int i = 0; i<32; i++)
-                    System.out.print(padraoBinario[i]);
-                System.out.println('\n');
+                FileOutputStream arquivoBin = new FileOutputStream("binario.txt");
+                PrintWriter pr = new PrintWriter(arquivoBin);
+
+                for(Long mem : Memoria.memWord)
+                {
+                    Utilidade.binarizer(0,padraoBinario,mem,31);
+                    for(int i = 0; i<32; i++)
+                        pr.print(padraoBinario[i]);
+                    pr.print('\n');
+
+                }
+
+                pr.close();
+                arquivoBin.close();
+
+            }catch(Exception a)
+            {
+                System.out.println("Não foi possível geraro arquivo");
             }
 
             Memoria.memWord.clear();
 
-            Utilidade.binarizer(0,padraoBinario,3,31);
-            for(int i = 0; i<32; i++)
-                System.out.print(padraoBinario[i]);
-            System.out.println('\n');
-
-            Utilidade.binarizer(0,padraoBinario,-3,31);
-            for(int i = 0; i<32; i++)
-                System.out.print(padraoBinario[i]);
-            System.out.println('\n');
+            //addi $t0,$t0,3
 
         });
     }
