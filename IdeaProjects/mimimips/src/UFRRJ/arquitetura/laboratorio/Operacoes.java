@@ -74,6 +74,8 @@ public class Operacoes {
     {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
+
+
     ///////
     /////// UNIDADE DE ARITMÉTICA LÓGICA ///////
     ///////
@@ -87,6 +89,8 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void addi(int rs, int rt, int imediato)//op 8
     {
         ConjuntoRegistradores.Registradores[rt].setValor(ConjuntoRegistradores.Registradores[rs].getValor() +
@@ -94,6 +98,8 @@ public class Operacoes {
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
+
+
 
     public static void addiu(int rs, int rt, int imediato)//op 9
     {
@@ -103,6 +109,8 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void addu(int rs, int rt, int rd)//op 0, funct 33
     {
         ConjuntoRegistradores.Registradores[rd].setValor(ConjuntoRegistradores.Registradores[rs].getValor() +
@@ -110,6 +118,8 @@ public class Operacoes {
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
+
+
 
     public static void and(int rs, int rt, int rd)//op 0, funct 36
     {
@@ -119,6 +129,8 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void andi(int rs, int rt, int imediato)//op 12
     {
         ConjuntoRegistradores.Registradores[rt].setValor(ConjuntoRegistradores.Registradores[rs].getValor() &
@@ -127,12 +139,16 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void lui(int rt, int imediato)//op 15
     {
         ConjuntoRegistradores.Registradores[rt].setValor(imediato << 16);
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
+
+
 
     public static void nor(int rs, int rt, int rd)//op 0, funct 39 Analisar se está correto por causa do complementod de 2
     {
@@ -142,6 +158,8 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void or(int rs, int rt, int rd)//op 0, funct 37
     {
         ConjuntoRegistradores.Registradores[rd].setValor(ConjuntoRegistradores.Registradores[rs].getValor() |
@@ -150,6 +168,8 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void ori(int rs, int rt, int imediato)//op 13
     {
         ConjuntoRegistradores.Registradores[rt].setValor(ConjuntoRegistradores.Registradores[rs].getValor() |
@@ -157,6 +177,8 @@ public class Operacoes {
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
+
+
 
     public static void slt(int rs, int rt, int rd)//op 0, funct 42
     {
@@ -168,6 +190,8 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void slti(int rs, int rt, int imediato)//op 10
     {
         if(ConjuntoRegistradores.Registradores[rs].getValor() < imediato)
@@ -177,6 +201,8 @@ public class Operacoes {
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
+
+
 
     public static void sltiu(int rs, int rt, int imediato)//op 11
     {
@@ -188,6 +214,8 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void sltu(int rs, int rt, int rd)//op 0, funct 43
     {
         if(ConjuntoRegistradores.Registradores[rs].getValor() < ConjuntoRegistradores.Registradores[rt].getValor())
@@ -198,6 +226,8 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void sub(int rs, int rt, int rd)//op 0, funct 34
     {
         ConjuntoRegistradores.Registradores[rd].setValor(ConjuntoRegistradores.Registradores[rs].getValor() -
@@ -207,6 +237,8 @@ public class Operacoes {
         //TODO: lançar um erro em caso de overflow, o subu que ignora overflow
     }
 
+
+
     public static void subu(int rs, int rt, int rd)//op 0, funct 35
     {
         ConjuntoRegistradores.Registradores[rd].setValor(ConjuntoRegistradores.Registradores[rs].getValor() -
@@ -215,6 +247,8 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void xor(int rs, int rt, int rd)//op 0, funct 38
     {
         ConjuntoRegistradores.Registradores[rd].setValor(ConjuntoRegistradores.Registradores[rs].getValor() ^
@@ -222,6 +256,8 @@ public class Operacoes {
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
+
+
 
     public static void xori(int rs, int rt, int imediato)//op 14
     {
@@ -241,6 +277,8 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
+
+
     public static void sllv(int rs, int rt, int rd)//op 0, funct 4
     {
         ConjuntoRegistradores.Registradores[rd].setValor(ConjuntoRegistradores.Registradores[rt].getValor() <<
@@ -248,6 +286,8 @@ public class Operacoes {
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
+
+
 
     public static void sra(int rt, int rd, int shamt)//op 0, funct 3
     {
@@ -334,7 +374,7 @@ public class Operacoes {
     public static void mult(int rs, int rt)//op 0, funct 24
     {
         int x = (1 << 32) - 1;
-        int y = ConjuntoRegistradores.Registradores[rs].getValor()* ConjuntoRegistradores.Registradores[rt];
+        int y = ConjuntoRegistradores.Registradores[rs].getValor()* ConjuntoRegistradores.Registradores[rt].getValor();
 
         ConjuntoRegistradores.Registradores[34].setValor(x & y);
         ConjuntoRegistradores.Registradores[33].setValor((x << 32) & y);
@@ -345,7 +385,7 @@ public class Operacoes {
     public static void multu(int rs, int rt)//op 0, funct 25
     {
         int x = (1 << 32) - 1;
-        int y = ConjuntoRegistradores.Registradores[rs].getValor()* ConjuntoRegistradores.Registradores[rt];
+        int y = ConjuntoRegistradores.Registradores[rs].getValor()* ConjuntoRegistradores.Registradores[rt].getValor();
 
         ConjuntoRegistradores.Registradores[34].setValor(x & y);
         ConjuntoRegistradores.Registradores[33].setValor(x & (y << 32));
@@ -357,7 +397,7 @@ public class Operacoes {
     ///////
     public static void beq(int rs, int rt, int offset)//op 4
     {
-        if(ConjuntoRegistradores.Registradores[rt].getValor == ConjuntoRegistradores.Registradores[rs].getValor())
+        if(ConjuntoRegistradores.Registradores[rt].getValor() == ConjuntoRegistradores.Registradores[rs].getValor())
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else
@@ -366,7 +406,7 @@ public class Operacoes {
 
     public static void bge(int rs, int rt, int offset)//op ?  TALVEZ ERRADO
     {
-        if(ConjuntoRegistradores.Registradores[rt].getValor >= ConjuntoRegistradores.Registradores[rs].getValor())
+        if(ConjuntoRegistradores.Registradores[rt].getValor() >= ConjuntoRegistradores.Registradores[rs].getValor())
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else
@@ -375,7 +415,7 @@ public class Operacoes {
 
     public static void bgez(int rs, int offset)//op 1, rt 1
     {
-        if(ConjuntoRegistradores.Registradores[rs].getValor >= 0)
+        if(ConjuntoRegistradores.Registradores[rs].getValor() >= 0)
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else
@@ -385,7 +425,7 @@ public class Operacoes {
     public static void bgezal(int rs, int offset)//op 1, rt 17
     {
 
-        if(ConjuntoRegistradores.Registradores[rs].getValor >= 0) {
+        if(ConjuntoRegistradores.Registradores[rs].getValor() >= 0) {
             ConjuntoRegistradores.Registradores[31].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
             ConjuntoRegistradores.Registradores[32].setValor(offset);
         }
@@ -396,7 +436,7 @@ public class Operacoes {
 
     public static void bgt(int rs, int rt, int offset)//op ?
     {
-        if(ConjuntoRegistradores.Registradores[rt].getValor > ConjuntoRegistradores.Registradores[rs].getValor())
+        if(ConjuntoRegistradores.Registradores[rt].getValor() > ConjuntoRegistradores.Registradores[rs].getValor())
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else
@@ -405,7 +445,7 @@ public class Operacoes {
 
     public static void bgtz(int rs, int offset)//op 7
     {
-        if(ConjuntoRegistradores.Registradores[rs].getValor > 0)
+        if(ConjuntoRegistradores.Registradores[rs].getValor() > 0)
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else
@@ -414,7 +454,7 @@ public class Operacoes {
 
     public static void ble(int rs, int rt, int offset)//op ?
     {
-        if(ConjuntoRegistradores.Registradores[rt].getValor <= ConjuntoRegistradores.Registradores[rs].getValor())
+        if(ConjuntoRegistradores.Registradores[rt].getValor() <= ConjuntoRegistradores.Registradores[rs].getValor())
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else
@@ -423,7 +463,7 @@ public class Operacoes {
 
     public static void blez(int rs, int offset)//op 6
     {
-        if(ConjuntoRegistradores.Registradores[rs].getValor <= 0)
+        if(ConjuntoRegistradores.Registradores[rs].getValor() <= 0)
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else
@@ -432,7 +472,7 @@ public class Operacoes {
 
     public static void blt(int rs, int rt, int offset)//op ?
     {
-        if(ConjuntoRegistradores.Registradores[rt].getValor < ConjuntoRegistradores.Registradores[rs].getValor())
+        if(ConjuntoRegistradores.Registradores[rt].getValor() < ConjuntoRegistradores.Registradores[rs].getValor())
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else
@@ -441,7 +481,7 @@ public class Operacoes {
 
     public static void bltz(int rs, int offset)//op 1, rt 0
     {
-        if(ConjuntoRegistradores.Registradores[rs].getValor < 0)
+        if(ConjuntoRegistradores.Registradores[rs].getValor() < 0)
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else
@@ -450,7 +490,7 @@ public class Operacoes {
 
     public static void bltzal(int rs, int offset)//op 1, rt 16
     {
-        if(ConjuntoRegistradores.Registradores[rs].getValor < 0) {
+        if(ConjuntoRegistradores.Registradores[rs].getValor() < 0) {
             ConjuntoRegistradores.Registradores[31].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
             ConjuntoRegistradores.Registradores[32].setValor(offset);
         }
@@ -461,7 +501,7 @@ public class Operacoes {
 
     public static void bne(int rs, int rt, int offset)//op 5
     {
-        if(ConjuntoRegistradores.Registradores[rt].getValor != ConjuntoRegistradores.Registradores[rs].getValor())
+        if(ConjuntoRegistradores.Registradores[rt].getValor() != ConjuntoRegistradores.Registradores[rs].getValor())
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else

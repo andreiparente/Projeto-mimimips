@@ -94,19 +94,19 @@ public class Montador
 
     protected void montar(String teste)
     {
-        StringTokenizer st = new StringTokenizer(teste," ,'\n'");
-        while(st.hasMoreTokens()) {
+        StringTokenizer st = new StringTokenizer(teste," ,'\n'");//captura toodo o texto da string "teste" e ignora to espaço, virgula e "enters"
+        while(st.hasMoreTokens()) {//enquanto houverem tokens na string
 
 
-            int[] padraoBinario = new int[32];
+            int[] padraoBinario = new int[32];//vetor que irá receber o padrão binario para criar a palavra como inteiro
 
             int palavra = 0;
 
-            switch (st.nextToken()) {
+            switch (st.nextToken()) {//le o token
                 case "add": {
-                    Utilidade.binarizer(0, padraoBinario, 0, 5);
-                    int aux = map.get(st.nextToken());
-                    Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                    Utilidade.binarizer(0, padraoBinario, 0, 5);//começa a preencher o vetor padrão binario
+                    int aux = map.get(st.nextToken());//armazena o primeiro campo de registrador aqui, pq ele so vai ser usado depois dos 2 subsequentes
+                    Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);//busca no mapa através da string do token, então pega o valor atribuido e "binariza" no vetor
                     Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
                     Utilidade.binarizer(16, padraoBinario, aux, 20);
                     Utilidade.binarizer(21, padraoBinario, 0, 25);
@@ -115,8 +115,8 @@ public class Montador
                 }
             }
 
-            palavra = Utilidade.desBinarizerWord(palavra, padraoBinario);
-            Memoria.memWord.add(palavra);
+            palavra = Utilidade.desBinarizerWord(palavra, padraoBinario);//transforma o binario em um inteiro
+            Memoria.memWord.add(palavra);//armazena na memoria, onde será recuperado pelo interpretador
         }
 
     }
