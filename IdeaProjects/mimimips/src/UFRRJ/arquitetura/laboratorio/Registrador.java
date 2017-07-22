@@ -9,7 +9,7 @@ public class Registrador {
 
     private final String nome;// $
     private final int valorBase;// valor inicial 0 ou no caso de ponteiros o referente a memora ($sp ou $gp)
-    private int valor;//valor passado pelo usuario
+    private long valor;//valor passado pelo usuario
     private final int numero;// numero do registrador e tambem o indice do vetor que irá ser o conjunto de registradores
 
 
@@ -28,11 +28,11 @@ public class Registrador {
         return valorBase;
     }
 
-    public int getValor() {
+    public long getValor() {
         return valor;
     }
 
-    public void setValor(int valor) {
+    public void setValor(long valor) {
         this.valor = valor;
     }
 

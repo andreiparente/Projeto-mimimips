@@ -96,28 +96,28 @@ public class ConjuntoRegistradores {
         registradorMap.put("$fp", new Registrador("$fp", 30, 0));
         registradorMap.put("$ra", new Registrador("$ra", 31, 0));
     }*/
-    public static void setValorRegistrador(String nome, int valor) {//atribui valor ao registrador (essencial para o addi)
+    public static void setValorRegistrador(String nome, long valor) {//atribui valor ao registrador (essencial para o addi)
         if (Registradores[0].getNome().equals(nome) || Registradores[1].getNome().equals(nome)) {
 
         }
 
-        for (int i = 2; i < 32; i++) {
+        for (long i = 2; i < 32; i++) {
 
-            if (Registradores[i].getNome().equals(nome)) {
-                Registradores[i].setValor(valor);
+            if (Registradores[(int) i].getNome().equals(nome)) {
+                Registradores[(int) i].setValor(valor);
                 break;
             }
         }
     }
 
     public static Registrador getRegistrador(String nome) {
-        int i;
+        long i;
         for (i = 0; i < 32; i++) {
-            if (ConjuntoRegistradores.Registradores[i].getNome().equals(nome))
+            if (ConjuntoRegistradores.Registradores[(int) i].getNome().equals(nome))
                 break;
         }
 
-        return(ConjuntoRegistradores.Registradores[i]);
+        return(ConjuntoRegistradores.Registradores[(int) i]);
     }
 
 }
