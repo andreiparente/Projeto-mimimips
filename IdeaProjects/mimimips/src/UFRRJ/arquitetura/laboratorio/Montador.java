@@ -114,6 +114,7 @@ public class Montador
 
                 }
 
+
             }
 
             palavra = Utilidade.desBinarizerWord(palavra, padraoBinario);//transforma o binario em um inteiro
