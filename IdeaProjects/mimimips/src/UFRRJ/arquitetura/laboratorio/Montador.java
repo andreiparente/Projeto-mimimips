@@ -178,12 +178,12 @@ public class Montador {
                     firstToken.equals("xori") ||
                     firstToken.equals("beq") ||
                     firstToken.equals("bne")) {
-                Utilidade.binarizer(0, padraoBinario, Integer.parseInt(firstToken), 5);
-                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
                 Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
                 Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
             } else if( firstToken.equals("lui")) { //SEM TESTE
-                Utilidade.binarizer(0, padraoBinario, Integer.parseInt(firstToken), 5);
+                Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
                 Utilidade.binarizer(6, padraoBinario, 0, 10);
                 Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
                 Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
