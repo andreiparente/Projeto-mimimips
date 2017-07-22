@@ -193,6 +193,9 @@ public class Montador {
                     firstToken.equals("bltzal") ||
                     firstToken.equals("bgtz") ||
                     firstToken.equals("blez")) {
+                if( firstToken.equals("bgez"))
+                    Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+
                 Utilidade.binarizer(0, padraoBinario, Integer.parseInt(firstToken), 5);
                 Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
                 Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
