@@ -92,6 +92,7 @@ public class Montador {
         map.put("j", 2);
         map.put("jal", 3);
         map.put("lw", 35);
+        map.put("sw", 43);
 
 
         //todo terminar todos os hashs de função
@@ -117,17 +118,23 @@ public class Montador {
                     firstToken.equals("sltu") ||
                     firstToken.equals("sub") ||
                     firstToken.equals("subu") ||
-                    firstToken.equals("xor") ||
-                    firstToken.equals("sllv") ||
-                    firstToken.equals("srav") || //NEED FIX
-                    firstToken.equals("srlv")) { //NEED FIX
+                    firstToken.equals("xor")) {
                 Utilidade.binarizer(0, padraoBinario, 0, 5);//começa a preencher o vetor padrão binario
                 Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
                 Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);//busca no mapa através da string do token, então pega o valor atribuido e "binariza" no vetor
                 Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
                 Utilidade.binarizer(21, padraoBinario, 0, 25);
                 Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-            } else if (firstToken.equals("sll") ||
+            } else if (firstToken.equals("sllv") ||
+                    firstToken.equals("srav") ||
+                    firstToken.equals("srlv")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            }else if (firstToken.equals("sll") ||
                     firstToken.equals("sra") ||
                     firstToken.equals("srl")) {
                 Utilidade.binarizer(0, padraoBinario, 0, 5);
@@ -136,7 +143,7 @@ public class Montador {
                 Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
                 Utilidade.binarizer(21, padraoBinario, Integer.parseInt(st.nextToken()), 25);
                 Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-            } else if (firstToken.equals("div") || //NEED FIX ALL, INT OVERFLOW
+            } else if (firstToken.equals("div") ||
                     firstToken.equals("divu") ||
                     firstToken.equals("mult") ||
                     firstToken.equals("multu")) {
@@ -154,7 +161,7 @@ public class Montador {
                 Utilidade.binarizer(11, padraoBinario, 0, 15);
                 Utilidade.binarizer(21, padraoBinario, 0, 25);
                 Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-            } else if(firstToken.equals("mthi") || // SEM TESTE
+            } else if(firstToken.equals("mthi") ||
                     firstToken.equals("mtlo") ||
                     firstToken.equals("jr")) {
                 Utilidade.binarizer(0, padraoBinario, 0, 5);
@@ -163,14 +170,13 @@ public class Montador {
                 Utilidade.binarizer(11, padraoBinario, 0, 15);
                 Utilidade.binarizer(21, padraoBinario, 0, 25);
                 Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-            } else if(firstToken.equals("jalr")) { // SEM TESTE
+            } else if(firstToken.equals("jalr")) {
                 Utilidade.binarizer(0, padraoBinario, 0, 5);
-                Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
                 Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
                 Utilidade.binarizer(11, padraoBinario, 0, 15);
                 Utilidade.binarizer(21, padraoBinario, 0, 25);
                 Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-            } else if(firstToken.equals("addi") || //SEM TESTE
+            } else if(firstToken.equals("addi") ||
                     firstToken.equals("addiu") ||
                     firstToken.equals("andi") ||
                     firstToken.equals("ori") ||
@@ -183,13 +189,14 @@ public class Montador {
                 Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
                 Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
                 Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
-            } else if(firstToken.equals("lw")) {
+            } else if(firstToken.equals("lw") ||
+                    firstToken.equals("sw")) {
                 Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
                 Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
                 Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
                 Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
-            } else if(firstToken.equals("lui")) { //SEM TESTE
-                Utilidade.binarizer(0, padraoBinario, Integer.parseInt(firstToken), 5);
+            } else if(firstToken.equals("lui")) {
+                Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
                 Utilidade.binarizer(6, padraoBinario, 0, 10);
                 Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
                 Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);

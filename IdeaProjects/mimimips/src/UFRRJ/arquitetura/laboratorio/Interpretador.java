@@ -121,7 +121,7 @@ public class Interpretador {
                         break;
 
                     case 9:
-                        Operacoes.jalr(Operacoes.getRs(palavra), Operacoes.getRd(palavra));
+                        Operacoes.jalr(Operacoes.getRs(palavra));
                         break;
 
                     case 8:
@@ -204,6 +204,10 @@ public class Interpretador {
 
                     case 35:
                         Operacoes.lw(Operacoes.getRs(palavra), Operacoes.getRt(palavra), Operacoes.getI(palavra));
+                        break;
+
+                    case 43:
+                        Operacoes.sw(Operacoes.getRs(palavra), Operacoes.getRt(palavra), Operacoes.getI(palavra));
                         break;
                 }
             }

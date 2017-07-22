@@ -7,21 +7,23 @@ public class Main {
 
     public static void main(String[] args) {
 
-       Memoria.memValor[1] = 12;
-
-        String teste = "lw $t2, 4($t0)";
-
         Montador montador = new Montador();
-        //teste = "mfhi $t2";
+
+        //Memoria.memValor[2] = 13;
+
+        String teste = "addi $t0, $t0, -6";
         montador.montar(teste);
+        //teste = "bgezal $t1, 666";
+        //montador.montar(teste);
         Interpretador interpretador = new Interpretador();
 
-        ConjuntoRegistradores.Registradores[8].setValor(0);
-        ConjuntoRegistradores.Registradores[9].setValor(7);
+        ConjuntoRegistradores.Registradores[8].setValor(-25);
+        ConjuntoRegistradores.Registradores[9].setValor(-10);
 
 
         interpretador.interpretar();
-        System.out.println(ConjuntoRegistradores.Registradores[10].getValor());
+        //System.out.println(Memoria.memValor[2]);
+        System.out.println(ConjuntoRegistradores.Registradores[8].getValor());
 
         System.out.println();
     }
