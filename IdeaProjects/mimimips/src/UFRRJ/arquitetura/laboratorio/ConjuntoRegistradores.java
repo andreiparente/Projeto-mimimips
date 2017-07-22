@@ -52,9 +52,6 @@ public class ConjuntoRegistradores {
 
     };
 
-    /**
-     * implementação futura dos registradores pc hi lo
-     */
 
 
     /**
@@ -99,7 +96,7 @@ public class ConjuntoRegistradores {
         registradorMap.put("$fp", new Registrador("$fp", 30, 0));
         registradorMap.put("$ra", new Registrador("$ra", 31, 0));
     }*/
-    public static void setValorRegistrador(String nome, int valor) {
+    public static void setValorRegistrador(String nome, int valor) {//atribui valor ao registrador (essencial para o addi)
         if (Registradores[0].getNome().equals(nome) || Registradores[1].getNome().equals(nome)) {
 
         }
