@@ -7,18 +7,15 @@ import java.util.StringTokenizer;
 /**
  * Created by windows on 25/06/17.
  */
-public class Montador
-{
-    HashMap<String,Integer> map = new HashMap<>();//inicializa o hashmap
+public class Montador {
+    HashMap<String, Integer> map = new HashMap<>();//inicializa o hashmap
 
     public Montador() {//construtor que inicializa
         this.mapStart();
     }
 
-    private void mapStart()
-    {
-        map.put("add",32);//hash map provisório que ira servir de base para a busca dos valores dos tokens
-        map.put("$zero",0);
+    private void mapStart() {
+        map.put("$zero", 0);
         map.put("$at", 1);
         map.put("$v0", 2);
         map.put("$v1", 3);
@@ -51,74 +48,162 @@ public class Montador
         map.put("$fp", 30);
         map.put("$ra", 31);
         map.put("pc", 32);
-        map.put("addu",33);
-        map.put("sub",34);
-        map.put("subu",35);
-        map.put("mul",24);
-        map.put("mulu",25);
-        map.put("div",26);
-        map.put("divu",27);
-        map.put("slt",42);
-        map.put("sltu",43);
-        map.put("and",36);
-        map.put("or",37);
-        map.put("nor",39);
-        map.put("xor", 40);
-        map.put("addi",8);//tipo i
-        map.put("aslti",10);
-        map.put("andi",12);
-        map.put("lw",35);
-        map.put("sw",43);
-        map.put("lbu",36);
-        map.put("lb",32);
-        map.put("sb",40);
-        map.put("lui",15);
-        map.put("beq",4);
-        map.put("bne",5);
-        map.put("blez",6);
-        map.put("bgtz",7);
-        map.put("bltz",1);
-        map.put("j",2);// formato j
-        map.put("jal",3);
-        map.put("jr",8);//formato R
-        map.put("jalr",9);
-        map.put("nop",0);
-        map.put("mfhi",16);
-        map.put("mflo",18);
-        map.put("mfepc",16);//Formato R com valor no op e func 0
-        map.put("mfco",16);//Formato R com valor no op e func 0
+        map.put("add", 32); // op 0, funct 32, value: (100+funct)
+        map.put("addu", 33);
+        map.put("and", 36);
+        map.put("or", 39);
+        map.put("slt", 42);
+        map.put("sltu", 43);
+        map.put("sub", 34);
+        map.put("subu", 35);
+        map.put("xor", 38);
+        map.put("sll", 0);
+        map.put("sllv", 4);
+        map.put("sra", 3);
+        map.put("srav", 7);
+        map.put("srl", 2);
+        map.put("srlv", 6);
+        map.put("div", 26);
+        map.put("divu", 27);
+        map.put("mfhi", 10);
+        map.put("mflo", 12);
+        map.put("mthi", 17);
+        map.put("mtlo", 19);
+        map.put("mult", 24);
+        map.put("multu", 25);
+        map.put("jalr", 9);
+        map.put("jr", 8);
+        map.put("addi", 8); // op 8, value: (200+op)
+        map.put("addiu", 9);
+        map.put("andi", 12);
+        map.put("lui", 15);
+        map.put("ori", 13);
+        map.put("slti", 10);
+        map.put("sltiu", 11);
+        map.put("xori", 14);
+        map.put("beq", 4);
+        /*map.put("bgez",1); // op 1, rt 1, value: (300+rt)
+        map.put("bgezal",17);
+        map.put("bltz",0);
+        map.put("bltzal",16);*/
+        map.put("bgtz", 7);
+        map.put("blez", 6);
+        map.put("bne", 5);
+        map.put("j", 2);
+        map.put("jal", 3);
+
 
         //todo terminar todos os hashs de função
 
     }
 
-    protected void montar(String teste)
-    {
-        StringTokenizer st = new StringTokenizer(teste," ,'\n'");//captura toodo o texto da string "teste" e ignora to espaço, virgula e "enters"
-        while(st.hasMoreTokens()) {//enquanto houverem tokens na string
+    protected void montar(String teste) {
+        StringTokenizer st = new StringTokenizer(teste, " ,'\n'");//captura toodo o texto da string "teste" e ignora to espaço, virgula e "enters"
+        while (st.hasMoreTokens()) {//enquanto houverem tokens na string
 
 
             int[] padraoBinario = new int[32];//vetor que irá receber o padrão binario para criar a palavra como inteiro
 
             int palavra = 0;
 
-            switch (st.nextToken()) {//le o token
+            String firstToken = new String(st.nextToken());
 
-                case "add" : {
-                    Utilidade.binarizer(0, padraoBinario, 0, 5);//começa a preencher o vetor padrão binario
-                    Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
-                    Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);//busca no mapa através da string do token, então pega o valor atribuido e "binariza" no vetor
+            if (firstToken.equals("add") ||
+                    firstToken.equals("addu") ||
+                    firstToken.equals("and") ||
+                    firstToken.equals("or") ||
+                    firstToken.equals("slt") ||
+                    firstToken.equals("sltu") ||
+                    firstToken.equals("sub") ||
+                    firstToken.equals("subu") ||
+                    firstToken.equals("xor") ||
+                    firstToken.equals("sllv") ||
+                    firstToken.equals("srav") || //NEED FIX
+                    firstToken.equals("srlv")) { //NEED FIX
+                Utilidade.binarizer(0, padraoBinario, 0, 5);//começa a preencher o vetor padrão binario
+                Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);//busca no mapa através da string do token, então pega o valor atribuido e "binariza" no vetor
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if (firstToken.equals("sll") ||
+                    firstToken.equals("sra") ||
+                    firstToken.equals("srl")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
+                Utilidade.binarizer(6, padraoBinario, 0, 10);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(21, padraoBinario, Integer.parseInt(st.nextToken()), 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if (firstToken.equals("div") || //NEED FIX ALL, INT OVERFLOW
+                    firstToken.equals("divu") ||
+                    firstToken.equals("mult") ||
+                    firstToken.equals("multu")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, 0, 20);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if(firstToken.equals("mfhi") || //SEM TESTE
+                    firstToken.equals("mflo")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
+                Utilidade.binarizer(6, padraoBinario, 0, 10);
+                Utilidade.binarizer(11, padraoBinario, 0, 15);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if(firstToken.equals("mthi") || // SEM TESTE
+                    firstToken.equals("mtlo") ||
+                    firstToken.equals("jr")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, 0, 20);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(11, padraoBinario, 0, 15);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if( firstToken.equals("jalr")) { // SEM TESTE
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(11, padraoBinario, 0, 15);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if( firstToken.equals("addi") || //SEM TESTE
+                    firstToken.equals("addiu") ||
+                    firstToken.equals("andi") ||
+                    firstToken.equals("ori") ||
+                    firstToken.equals("slti") ||
+                    firstToken.equals("sltiu") ||
+                    firstToken.equals("xori") ||
+                    firstToken.equals("beq") ||
+                    firstToken.equals("bne")) {
+                Utilidade.binarizer(0, padraoBinario, Integer.parseInt(firstToken), 5);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
+            } else if( firstToken.equals("lui")) { //SEM TESTE
+                Utilidade.binarizer(0, padraoBinario, Integer.parseInt(firstToken), 5);
+                Utilidade.binarizer(6, padraoBinario, 0, 10);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
+            } else if( firstToken.equals("bgez") || //SEM TESTE
+                    firstToken.equals("bgezal") ||
+                    firstToken.equals("bltz") ||
+                    firstToken.equals("bltzal") ||
+                    firstToken.equals("bgtz") ||
+                    firstToken.equals("blez")) {
+                if( firstToken.equals("bgez"))
                     Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
-                    Utilidade.binarizer(21, padraoBinario, 0, 25);
-                    Utilidade.binarizer(26, padraoBinario, 32, 31);
 
-                }
+                Utilidade.binarizer(0, padraoBinario, Integer.parseInt(firstToken), 5);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
             }
 
             palavra = Utilidade.desBinarizerWord(palavra, padraoBinario);//transforma o binario em um inteiro
             Memoria.memWord.add(palavra);//armazena na memoria, onde será recuperado pelo interpretador
         }
-
     }
-
 }
