@@ -200,7 +200,7 @@ public class Montador {
                 Utilidade.binarizer(6, padraoBinario, 0, 10);
                 Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
                 Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
-            } else if(firstToken.equals("bgez") || //SEM TESTE
+            } else if(firstToken.equals("bgez") ||
                     firstToken.equals("bgezal") ||
                     firstToken.equals("bltz") ||
                     firstToken.equals("bltzal") ||
@@ -218,10 +218,10 @@ public class Montador {
                 Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
                 Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
                 Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
-            } else if(firstToken.equals("j") || //SEM TESTE
+            } else if(firstToken.equals("j") ||
                     firstToken.equals("jal")) {
                 Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
-                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 31);
+                Utilidade.binarizer(6, padraoBinario, Integer.parseInt(st.nextToken()), 31);
             }
 
             palavra = Utilidade.desBinarizerWord(palavra, padraoBinario);//transforma o binario em um inteiro

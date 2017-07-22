@@ -11,19 +11,20 @@ public class Main {
 
         //Memoria.memValor[2] = 13;
 
-        String teste = "addi $t0, $t0, -6";
+        String teste = "jal 1000";
         montador.montar(teste);
-        //teste = "bgezal $t1, 666";
+        //teste = "blez $t1, 666";
         //montador.montar(teste);
         Interpretador interpretador = new Interpretador();
 
-        ConjuntoRegistradores.Registradores[8].setValor(-25);
-        ConjuntoRegistradores.Registradores[9].setValor(-10);
+        ConjuntoRegistradores.Registradores[8].setValor(-5);
+        ConjuntoRegistradores.Registradores[9].setValor(-1);
 
 
         interpretador.interpretar();
         //System.out.println(Memoria.memValor[2]);
-        System.out.println(ConjuntoRegistradores.Registradores[8].getValor());
+        System.out.println(ConjuntoRegistradores.Registradores[31].getValor());
+        System.out.println(ConjuntoRegistradores.Registradores[32].getValor());
 
         System.out.println();
     }
