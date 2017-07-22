@@ -105,10 +105,9 @@ public class Montador
             switch (st.nextToken()) {//le o token
                 case "add": {
                     Utilidade.binarizer(0, padraoBinario, 0, 5);//começa a preencher o vetor padrão binario
-                    int aux = map.get(st.nextToken());//armazena o primeiro campo de registrador aqui, pq ele so vai ser usado depois dos 2 subsequentes
+                    Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
                     Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);//busca no mapa através da string do token, então pega o valor atribuido e "binariza" no vetor
                     Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
-                    Utilidade.binarizer(16, padraoBinario, aux, 20);
                     Utilidade.binarizer(21, padraoBinario, 0, 25);
                     Utilidade.binarizer(26, padraoBinario, 32, 31);
 
