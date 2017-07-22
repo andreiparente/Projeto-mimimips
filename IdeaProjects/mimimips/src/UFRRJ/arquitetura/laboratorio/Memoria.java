@@ -8,8 +8,7 @@ import java.util.ArrayList;
 public class Memoria {
 
     public static long[] memValor = new long[128];//memoria que irá guardar os storewords etc
-
-    public static ArrayList<Long> memWord = new ArrayList<Long>();//memoria que irá guadar as words, array list pq vai ter que ser em sequencia msm, então meh
+    public static ArrayList<Long> memWord = new ArrayList<>();//memoria que irá guadar as words, array list pq vai ter que ser em sequencia msm, então meh
     //todo lógica do stackpointer
 
 

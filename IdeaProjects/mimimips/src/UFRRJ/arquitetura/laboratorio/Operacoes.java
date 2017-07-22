@@ -17,28 +17,28 @@ public class Operacoes {
 
 
 
-    public static long getRs(Long palavra)
+    public static long getRs(long palavra)
     {
         long rs = palavra >> 21;
         rs = rs & 31;
         return rs;
     }
 
-    public static long getRt(Long palavra)
+    public static long getRt(long palavra)
     {
         long rt = palavra >> 16;
         rt = rt & 31;
         return rt;
     }
 
-    public static long getRd(Long palavra)
+    public static long getRd(long palavra)
     {
         long rd = palavra >> 11;
         rd = rd & 31;
         return rd;
     }
 
-    public static long getOp(Long palavra)
+    public static long getOp(long palavra)
     {
         long op = palavra >> 26;
         op = op & 63;
@@ -52,17 +52,17 @@ public class Operacoes {
         return shamt;
     }
 
-    public static long getFunc(Long palavra)
+    public static long getFunc(long palavra)
     {
         return palavra & 63;
     }
 
-    public static long getI(Long palavra)
+    public static long getI(long palavra)
     {
-        return palavra & 65535;
+        return (palavra << 48) >> 48;
     }
 
-    public static long getTarget(Long palavra)
+    public static long getTarget(long palavra)
     {
         return palavra & 67108863;
     }
@@ -301,7 +301,7 @@ public class Operacoes {
     public static void srav(long rs, long rt, long rd)//op 0, funct 7
     {
         ConjuntoRegistradores.Registradores[(int) rd].setValor(ConjuntoRegistradores.Registradores[(int) rt].getValor() >>
-                (ConjuntoRegistradores.Registradores[(int) rs].getValor() & 31)); //pois é somente os 5 bits menores
+                (ConjuntoRegistradores.Registradores[(int) rs].getValor())); //pois é somente os 5 bits menores
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
@@ -374,22 +374,24 @@ public class Operacoes {
 
     public static void mult(long rs, long rt)//op 0, funct 24
     {
-        long x = (1 << 31) - 1; //ISSO DÁ ZERO POR CAUSA DE OVERFLOW
+        long x = (1 << 16) - 1;
         long y = ConjuntoRegistradores.Registradores[(int) rs].getValor()* ConjuntoRegistradores.Registradores[(int) rt].getValor();
 
-        ConjuntoRegistradores.Registradores[34].setValor(x & y);
-        ConjuntoRegistradores.Registradores[33].setValor((x << 31) & y);
+        ConjuntoRegistradores.Registradores[34].setValor((x & y) + (x << 16) & y);
+        ConjuntoRegistradores.Registradores[33].setValor((y - ConjuntoRegistradores.Registradores[34].getValor())
+                >> 32);
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
     public static void multu(long rs, long rt)//op 0, funct 25
     {
-        long x = (1 << 32) - 1;
+        long x = (1 << 16) - 1;
         long y = ConjuntoRegistradores.Registradores[(int) rs].getValor()* ConjuntoRegistradores.Registradores[(int) rt].getValor();
 
-        ConjuntoRegistradores.Registradores[34].setValor(x & y);
-        ConjuntoRegistradores.Registradores[33].setValor(x & (y << 32));
+        ConjuntoRegistradores.Registradores[34].setValor((x & y) + (x << 16) & y);
+        ConjuntoRegistradores.Registradores[33].setValor((y - ConjuntoRegistradores.Registradores[34].getValor())
+                >> 32);
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
@@ -523,9 +525,9 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(target);
     }
 
-    public static void jalr(long rs, long rd)//op 0, funct 9
+    public static void jalr(long rs)//op 0, funct 9
     {
-        ConjuntoRegistradores.Registradores[(int) rd].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
+        ConjuntoRegistradores.Registradores[31].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[(int) rs].getValor());
     }
@@ -561,7 +563,7 @@ public class Operacoes {
 
     // public static void sh(long rs, long rt, long offset){}
 
-    public static void sw(long rs, long rt, long offset)//op ?
+    public static void sw(long rs, long rt, long offset)//op 43
     {
         Memoria.memValor[(int) (ConjuntoRegistradores.Registradores[(int) rs].getValor()+offset/4)] =
                 (int) ConjuntoRegistradores.Registradores[(int) rt].getValor();
