@@ -199,7 +199,7 @@ public class Interpretador {
                         break;
 
                     case 3:
-                        Operacoes.j(Operacoes.getTarget(palavra));
+                        Operacoes.jal(Operacoes.getTarget(palavra));
                         break;
                 }
             }
