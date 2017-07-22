@@ -7,27 +7,21 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String teste = "add $t2, $t1, $t0";
+        String teste = "sub $t2, $t1, $t0";
 
         Montador montador = new Montador();
         montador.montar(teste);
-        teste = "add $t2, $t2, $t0";
+        //teste = "add $t2, $t2, $t0";
         montador.montar(teste);
         Interpretador interpretador = new Interpretador();
 
         ConjuntoRegistradores.Registradores[8].setValor(2);
-        ConjuntoRegistradores.Registradores[9].setValor(2);
+        ConjuntoRegistradores.Registradores[9].setValor(7);
 
 
         interpretador.interpretar();
         System.out.println(ConjuntoRegistradores.Registradores[10].getValor());
 
         System.out.println();
-
-
-
-
-
-
     }
 }
