@@ -373,11 +373,11 @@ public class Operacoes {
 
     public static void mult(int rs, int rt)//op 0, funct 24
     {
-        int x = (1 << 32) - 1;
+        int x = (1 << 31) - 1; //ISSO DÁ ZERO POR CAUSA DE OVERFLOW
         int y = ConjuntoRegistradores.Registradores[rs].getValor()* ConjuntoRegistradores.Registradores[rt].getValor();
 
         ConjuntoRegistradores.Registradores[34].setValor(x & y);
-        ConjuntoRegistradores.Registradores[33].setValor((x << 32) & y);
+        ConjuntoRegistradores.Registradores[33].setValor((x << 31) & y);
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
