@@ -2,6 +2,9 @@ package UFRRJ.arquitetura.laboratorio;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by windows on 03/07/17.
@@ -14,6 +17,8 @@ public class GUI {
     private JTabbedPane tabbedPane1;
     private JPanel Código;
     private JTable DataMem;
+    private JButton geraBinario;
+    private JButton abrirArquivo;
     private Montador montador;
     Interpretador interpretador;
 
@@ -30,10 +35,8 @@ public class GUI {
 
         montador = new Montador();
         interpretador = new Interpretador();
-        ConjuntoRegistradores.Registradores[8].setValor(2);
-        ConjuntoRegistradores.Registradores[9].setValor(2);
         String[] colunas = {"Registrador","Número","Valor"};
-        String[] colunasMem = {"Adress","(+4)","(+8)","(+12)","(+16)","(+20)","(+24)","(+28)","(+32)"};
+        String[] colunasMem = {"Adress","(+0)","(+4)","(+8)","(+12)","(+16)","(+20)","(+24)","(+28)"};
         DefaultTableModel regis = new DefaultTableModel();
         DefaultTableModel dataMem = new DefaultTableModel();
         regis.setColumnIdentifiers(colunas);
@@ -109,8 +112,38 @@ public class GUI {
                 Memoria.memValor[index] = 0;
             }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ConjuntoRegistradores.Registradores[8].setValor(2);
-            ConjuntoRegistradores.Registradores[9].setValor(2);
+            Memoria.memWord.clear();
+
+        });
+
+
+        geraBinario.addActionListener(e->{
+            String teste;
+            teste = campoDeCodigo.getText();//pega toodo o texto e manda para uma string a ser tokenizada e jogada no montador
+            montador.montar(teste);//monta e joga na memoria
+            interpretador.interpretar();//pega na memoria e interpreta
+
+            long padraoBinario[] = new long[32];
+
+            for(Long mem : Memoria.memWord)
+            {
+                Utilidade.binarizer(0,padraoBinario,mem,31);
+                for(int i = 0; i<32; i++)
+                    System.out.print(padraoBinario[i]);
+                System.out.println('\n');
+            }
+
+            Memoria.memWord.clear();
+
+            Utilidade.binarizer(0,padraoBinario,3,31);
+            for(int i = 0; i<32; i++)
+                System.out.print(padraoBinario[i]);
+            System.out.println('\n');
+
+            Utilidade.binarizer(0,padraoBinario,-3,31);
+            for(int i = 0; i<32; i++)
+                System.out.print(padraoBinario[i]);
+            System.out.println('\n');
 
         });
     }

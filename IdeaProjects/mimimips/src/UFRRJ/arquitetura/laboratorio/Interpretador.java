@@ -15,19 +15,19 @@ public class Interpretador {
      */
 
     public void interpretar() {
-        int palavra;
+        Long palavra;
 
         while (Memoria.index < Memoria.memWord.size()) //enquanto tiver coisa na memoria
         {
 
             palavra = Memoria.memWord.get(Memoria.index);
 
-            int op = Operacoes.getOp(palavra);//pega o opcode do inteiro
+            long op = Operacoes.getOp(palavra);//pega o opcode do inteiro
 
             if (op == 0) {//conjunto de todos os opcodes 0
-                int func = Operacoes.getFunc(palavra);//retira a func do inteiro
+                long func = Operacoes.getFunc(palavra);//retira a func do inteiro
 
-                switch (func) {//agora passeia pela lista de funções de opcode 0
+                switch ((int) func) {//agora passeia pela lista de funções de opcode 0
                     case 32:
                         Operacoes.add(Operacoes.getRs(palavra), Operacoes.getRt(palavra), Operacoes.getRd(palavra));
                         break;
@@ -130,7 +130,7 @@ public class Interpretador {
                 }
             }
             else {
-                switch (op) {
+                switch ((int) op) {
                     case 8:
                         Operacoes.addi(Operacoes.getRs(palavra), Operacoes.getRt(palavra), Operacoes.getI(palavra));
                         break;
@@ -200,6 +200,10 @@ public class Interpretador {
 
                     case 3:
                         Operacoes.jal(Operacoes.getTarget(palavra));
+                        break;
+
+                    case 35:
+                        Operacoes.lw(Operacoes.getRs(palavra), Operacoes.getRt(palavra), Operacoes.getI(palavra));
                         break;
                 }
             }
