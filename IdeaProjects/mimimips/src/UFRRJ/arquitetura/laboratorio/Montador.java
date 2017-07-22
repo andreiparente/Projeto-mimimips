@@ -113,6 +113,7 @@ public class Montador
                     Utilidade.binarizer(26, padraoBinario, 32, 31);
 
                 }
+
             }
 
             palavra = Utilidade.desBinarizerWord(palavra, padraoBinario);//transforma o binario em um inteiro

@@ -61,7 +61,7 @@ public class GUI {
         dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
         dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
 
-        dataMem.setValueAt(Memoria.memValor[1],5,5);
+
 
         compilar.addActionListener(e -> {
             String teste;
@@ -72,13 +72,12 @@ public class GUI {
 
             while(regis.getRowCount()>0){
                 regis.removeRow(0);}
-            while(dataMem.getRowCount()>0){
-                dataMem.removeRow(0);}
+
 
             for (int index = 0; index < 35; index++)
             {
                 regis.addRow(new Object[]{ConjuntoRegistradores.Registradores[index].getNome(),
-                                        ConjuntoRegistradores.Registradores[index].getValor(),
+                                        ConjuntoRegistradores.Registradores[index].getNumero(),
                                         ConjuntoRegistradores.Registradores[index].getValor()}
                                         );
             }
@@ -87,19 +86,28 @@ public class GUI {
             {
                 ConjuntoRegistradores.Registradores[index].setValor(ConjuntoRegistradores.Registradores[index].getValorBase());
             }
+
+
 ///////////////////////////////////////////////////////LOGICA DA MEMORIA DATA SEGMENT//////////////////////////////////
-            /*for (int index = 0; index < 128; index++)
+
+
+
+            int indiceMemoria = 0;
+            for(int i = 0; i<16; i++)//total de linhas da tabela de memoria
             {
-                regis.addRow(new Object[]{ConjuntoRegistradores.Registradores[index].getNome(),
-                        ConjuntoRegistradores.Registradores[index].getValor(),
-                        ConjuntoRegistradores.Registradores[index].getValor()}
-                );
+                for(int j = 1; j<9; j++)//percorrendo agora as colunas, deixando sempre a primeira para o endereço de memoria
+                {
+                    dataMem.setValueAt(Memoria.memValor[indiceMemoria++],i,j);//seta o conteudo da memoria
+                }
+
+
+                dataMem.setValueAt(268501216L + (32*i),i,0);
             }
 
-            for (int index = 0; index < 128; index+=9)
+            for (int index = 0; index < 128; index++)
             {
-                regis.
-            }*/
+                Memoria.memValor[index] = 0;
+            }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ConjuntoRegistradores.Registradores[8].setValor(2);
             ConjuntoRegistradores.Registradores[9].setValor(2);
