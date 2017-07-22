@@ -21,7 +21,7 @@ public class Utilidade{
         }
     }
 
-    public static int desBinarizerWord(int palavra, int[] padraoBinario) {
+    public static long desBinarizerWord(long palavra, int[] padraoBinario) {
         int expoente = 31;
         for (int i = 0; i < 32; i++) {
 
