@@ -13,7 +13,7 @@ public class GUI {
     private JTable Registradores;
     private JTabbedPane tabbedPane1;
     private JPanel Código;
-    private JTable table1;
+    private JTable DataMem;
     private Montador montador;
     Interpretador interpretador;
 
@@ -33,13 +33,35 @@ public class GUI {
         ConjuntoRegistradores.Registradores[8].setValor(2);
         ConjuntoRegistradores.Registradores[9].setValor(2);
         String[] colunas = {"Registrador","Número","Valor"};
+        String[] colunasMem = {"Adress","(+4)","(+8)","(+12)","(+16)","(+20)","(+24)","(+28)","(+32)"};
+        DefaultTableModel regis = new DefaultTableModel();
+        DefaultTableModel dataMem = new DefaultTableModel();
+        regis.setColumnIdentifiers(colunas);
+        dataMem.setColumnIdentifiers(colunasMem);
 
-        DefaultTableModel res = new DefaultTableModel();
-        res.setColumnIdentifiers(colunas);
+
+        DataMem.setModel(dataMem);
+        Registradores.setModel(regis);
 
 
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
+        dataMem.addRow(new Object[]{0,0,0,0,0,0,0,0,0});
 
-        Registradores.setModel(res);
+        dataMem.setValueAt(Memoria.memValor[1],5,5);
 
         compilar.addActionListener(e -> {
             String teste;
@@ -48,11 +70,14 @@ public class GUI {
             interpretador.interpretar();//pega na memoria e interpreta
             System.out.println(ConjuntoRegistradores.Registradores[10].getValor());//printa no terminal, é provisório, apenas para acompanharmos como está indo
 
-            while(res.getRowCount()>0){
-                res.removeRow(0);}
+            while(regis.getRowCount()>0){
+                regis.removeRow(0);}
+            while(dataMem.getRowCount()>0){
+                dataMem.removeRow(0);}
+
             for (int index = 0; index < 35; index++)
             {
-                res.addRow(new Object[]{ConjuntoRegistradores.Registradores[index].getNome(),
+                regis.addRow(new Object[]{ConjuntoRegistradores.Registradores[index].getNome(),
                                         ConjuntoRegistradores.Registradores[index].getValor(),
                                         ConjuntoRegistradores.Registradores[index].getValor()}
                                         );
@@ -62,7 +87,20 @@ public class GUI {
             {
                 ConjuntoRegistradores.Registradores[index].setValor(ConjuntoRegistradores.Registradores[index].getValorBase());
             }
+///////////////////////////////////////////////////////LOGICA DA MEMORIA DATA SEGMENT//////////////////////////////////
+            /*for (int index = 0; index < 128; index++)
+            {
+                regis.addRow(new Object[]{ConjuntoRegistradores.Registradores[index].getNome(),
+                        ConjuntoRegistradores.Registradores[index].getValor(),
+                        ConjuntoRegistradores.Registradores[index].getValor()}
+                );
+            }
 
+            for (int index = 0; index < 128; index+=9)
+            {
+                regis.
+            }*/
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ConjuntoRegistradores.Registradores[8].setValor(2);
             ConjuntoRegistradores.Registradores[9].setValor(2);
 
