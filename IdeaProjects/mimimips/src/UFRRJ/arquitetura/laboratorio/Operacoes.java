@@ -1,5 +1,7 @@
 package UFRRJ.arquitetura.laboratorio;
 
+import javax.swing.*;
+
 /**
  * Created by windows on 22/06/17.
  */
@@ -80,6 +82,9 @@ public class Operacoes {
     ///////
     /////// UNIDADE DE ARITMÉTICA LÓGICA ///////
     ///////
+
+
+
     public static void add(long rs, long rt, long rd)//op 0, funct 32
     {
 
@@ -88,6 +93,7 @@ public class Operacoes {
             //TODO: lançar um erro em caso de overflow, o addu que ignora overflow
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
+
     }
 
 

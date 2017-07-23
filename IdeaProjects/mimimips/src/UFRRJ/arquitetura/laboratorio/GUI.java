@@ -153,6 +153,8 @@ public class GUI {
                 pr.close();
                 arquivoBin.close();
 
+                JOptionPane.showMessageDialog(null,"Arquivo criado com sucesso na pasta raíz do projeto");
+
             }catch(Exception a)
             {
                 System.out.println("Não foi possível geraro arquivo");
@@ -163,5 +165,7 @@ public class GUI {
             //addi $t0,$t0,3
 
         });
+        abrirArquivo.addActionListener(e->{
+            JOptionPane.showMessageDialog(null,"Funções não operantes:\n-Não realiza desvios baseados em branches\n-Não cria .data ou .text\n-Não debuga\n-Não aponta erros\n-Cria arquivo binário, porém não le código do arquivo");});
     }
 }
