@@ -1,5 +1,6 @@
 package UFRRJ.arquitetura.laboratorio;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 /**
@@ -96,6 +97,9 @@ public class ConjuntoRegistradores {
         registradorMap.put("$fp", new Registrador("$fp", 30, 0));
         registradorMap.put("$ra", new Registrador("$ra", 31, 0));
     }*/
+
+
+
     public static void setValorRegistrador(String nome, long valor) {//atribui valor ao registrador (essencial para o addi)
         if (Registradores[0].getNome().equals(nome) || Registradores[1].getNome().equals(nome)) {
 
