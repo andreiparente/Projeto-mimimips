@@ -10,20 +10,20 @@ public class Main {
         Montador montador = new Montador();
 
         //Memoria.memValor[2] = 13;
-
-        String teste = "jal 1000";
+        System.out.println(ConjuntoRegistradores.Registradores[32].getValor());
+        String teste = "blt $t1, $t0, 666";
         montador.montar(teste);
         //teste = "blez $t1, 666";
         //montador.montar(teste);
         Interpretador interpretador = new Interpretador();
 
         ConjuntoRegistradores.Registradores[8].setValor(-5);
-        ConjuntoRegistradores.Registradores[9].setValor(-1);
+        ConjuntoRegistradores.Registradores[9].setValor(1);
 
 
         interpretador.interpretar();
         //System.out.println(Memoria.memValor[2]);
-        System.out.println(ConjuntoRegistradores.Registradores[31].getValor());
+        //System.out.println(ConjuntoRegistradores.Registradores[31].getValor());
         System.out.println(ConjuntoRegistradores.Registradores[32].getValor());
 
         System.out.println();

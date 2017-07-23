@@ -1,7 +1,5 @@
 package UFRRJ.arquitetura.laboratorio;
 
-import javax.swing.*;
-
 /**
  * Created by windows on 22/06/17.
  */
@@ -82,9 +80,6 @@ public class Operacoes {
     ///////
     /////// UNIDADE DE ARITMÉTICA LÓGICA ///////
     ///////
-
-
-
     public static void add(long rs, long rt, long rd)//op 0, funct 32
     {
 
@@ -93,7 +88,6 @@ public class Operacoes {
             //TODO: lançar um erro em caso de overflow, o addu que ignora overflow
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
-
     }
 
 
@@ -413,15 +407,6 @@ public class Operacoes {
             ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
-    public static void bge(long rs, long rt, long offset)//op ?  TALVEZ ERRADO
-    {
-        if(ConjuntoRegistradores.Registradores[(int) rt].getValor() >= ConjuntoRegistradores.Registradores[(int) rs].getValor())
-            ConjuntoRegistradores.Registradores[32].setValor(offset);
-
-        else
-            ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
-    }
-
     public static void bgez(long rs, long offset)//op 1, rt 1
     {
         if(ConjuntoRegistradores.Registradores[(int) rs].getValor() >= 0)
@@ -443,15 +428,6 @@ public class Operacoes {
             ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
-    public static void bgt(long rs, long rt, long offset)//op ?
-    {
-        if(ConjuntoRegistradores.Registradores[(int) rt].getValor() > ConjuntoRegistradores.Registradores[(int) rs].getValor())
-            ConjuntoRegistradores.Registradores[32].setValor(offset);
-
-        else
-            ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
-    }
-
     public static void bgtz(long rs, long offset)//op 7
     {
         if(ConjuntoRegistradores.Registradores[(int) rs].getValor() > 0)
@@ -461,27 +437,9 @@ public class Operacoes {
             ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
-    public static void ble(long rs, long rt, long offset)//op ?
-    {
-        if(ConjuntoRegistradores.Registradores[(int) rt].getValor() <= ConjuntoRegistradores.Registradores[(int) rs].getValor())
-            ConjuntoRegistradores.Registradores[32].setValor(offset);
-
-        else
-            ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
-    }
-
     public static void blez(long rs, long offset)//op 6
     {
         if(ConjuntoRegistradores.Registradores[(int) rs].getValor() <= 0)
-            ConjuntoRegistradores.Registradores[32].setValor(offset);
-
-        else
-            ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
-    }
-
-    public static void blt(long rs, long rt, long offset)//op ?
-    {
-        if(ConjuntoRegistradores.Registradores[(int) rt].getValor() < ConjuntoRegistradores.Registradores[(int) rs].getValor())
             ConjuntoRegistradores.Registradores[32].setValor(offset);
 
         else
@@ -577,32 +535,57 @@ public class Operacoes {
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
-    /*public static void mul(long rs, long rt)//24
-    {
-        if(ConjuntoRegistradores.Registradores[(int) rs].getValor()* ConjuntoRegistradores.Registradores[(int) rt].getValor() > 2147483647)
-        {
-            ConjuntoRegistradores.Registradores[34].setValor(2147483647);
-            ConjuntoRegistradores.Registradores[33].setValor(ConjuntoRegistradores.Registradores[(int) rs].getValor() *
-                                                              ConjuntoRegistradores.Registradores[(int) rt].getValor()-2147483647);
-        }
+    ///////
+    /////// PSEUDO INSTRUÇÕES ///////
+    ///////
 
-        else
-        {
-            ConjuntoRegistradores.Registradores[34].setValor(ConjuntoRegistradores.Registradores[(int) rs].getValor() *
-                                                              ConjuntoRegistradores.Registradores[(int) rt].getValor());
-        }
+    public static void move(long rs, long rt) // op 0, funct 20
+    {
+        ConjuntoRegistradores.Registradores[(int) rt].setValor(ConjuntoRegistradores.Registradores[(int) rs].getValor());
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
     }
 
-
-    public static void mulu(long rs, long rt)//25
+    public static void li(long rt, long imediato)//op 21
     {
-        ConjuntoRegistradores.Registradores[33].setValor(ConjuntoRegistradores.Registradores[(int) rs].getValor() *
-                                                          ConjuntoRegistradores.Registradores[(int) rt].getValor());
-
+        ConjuntoRegistradores.Registradores[(int) rt].setValor(imediato);
 
         ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
-    }*/
+    }
 
+    public static void blt(long rs, long rt, long offset)//op 22
+    {
+        if(ConjuntoRegistradores.Registradores[(int) rt].getValor() < ConjuntoRegistradores.Registradores[(int) rs].getValor())
+            ConjuntoRegistradores.Registradores[32].setValor(offset);
+
+        else
+            ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
+    }
+
+    public static void ble(long rs, long rt, long offset)//op 23
+    {
+        if(ConjuntoRegistradores.Registradores[(int) rt].getValor() <= ConjuntoRegistradores.Registradores[(int) rs].getValor())
+            ConjuntoRegistradores.Registradores[32].setValor(offset);
+
+        else
+            ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
+    }
+
+    public static void bgt(long rs, long rt, long offset)//op 24
+    {
+        if(ConjuntoRegistradores.Registradores[(int) rt].getValor() > ConjuntoRegistradores.Registradores[(int) rs].getValor())
+            ConjuntoRegistradores.Registradores[32].setValor(offset);
+
+        else
+            ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
+    }
+
+    public static void bge(long rs, long rt, long offset)//op 25
+    {
+        if(ConjuntoRegistradores.Registradores[(int) rt].getValor() >= ConjuntoRegistradores.Registradores[(int) rs].getValor())
+            ConjuntoRegistradores.Registradores[32].setValor(offset);
+
+        else
+            ConjuntoRegistradores.Registradores[32].setValor(ConjuntoRegistradores.Registradores[32].getValor()+4);
+    }
 }

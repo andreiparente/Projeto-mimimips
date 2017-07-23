@@ -1,6 +1,5 @@
 package UFRRJ.arquitetura.laboratorio;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
@@ -94,6 +93,12 @@ public class Montador {
         map.put("jal", 3);
         map.put("lw", 35);
         map.put("sw", 43);
+        map.put("move", 20);
+        map.put("li", 21);
+        map.put("blt", 22);
+        map.put("ble", 23);
+        map.put("bgt", 24);
+        map.put("bge", 25);
 
 
         //todo terminar todos os hashs de função
@@ -102,135 +107,147 @@ public class Montador {
 
     protected void montar(String teste) {
         StringTokenizer st = new StringTokenizer(teste, " ,'\n'()");//captura toodo o texto da string "teste" e ignora to espaço, virgula e "enters"
-       try {
-           while (st.hasMoreTokens()) {//enquanto houverem tokens na string
+        while (st.hasMoreTokens()) {//enquanto houverem tokens na string
 
 
-               int[] padraoBinario = new int[32];//vetor que irá receber o padrão binario para criar a palavra como inteiro
+            int[] padraoBinario = new int[32];//vetor que irá receber o padrão binario para criar a palavra como inteiro
 
-               long palavra = 0;
+            long palavra = 0;
 
-               String firstToken = new String(st.nextToken());
+            String firstToken = new String(st.nextToken());
 
-               if (firstToken.equals("add") ||
-                       firstToken.equals("addu") ||
-                       firstToken.equals("and") ||
-                       firstToken.equals("or") ||
-                       firstToken.equals("slt") ||
-                       firstToken.equals("sltu") ||
-                       firstToken.equals("sub") ||
-                       firstToken.equals("subu") ||
-                       firstToken.equals("xor")) {
-                   Utilidade.binarizer(0, padraoBinario, 0, 5);//começa a preencher o vetor padrão binario
-                   Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
-                   Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);//busca no mapa através da string do token, então pega o valor atribuido e "binariza" no vetor
-                   Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
-                   Utilidade.binarizer(21, padraoBinario, 0, 25);
-                   Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-               } else if (firstToken.equals("sllv") ||
-                       firstToken.equals("srav") ||
-                       firstToken.equals("srlv")) {
-                   Utilidade.binarizer(0, padraoBinario, 0, 5);
-                   Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
-                   Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
-                   Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
-                   Utilidade.binarizer(21, padraoBinario, 0, 25);
-                   Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-               } else if (firstToken.equals("sll") ||
-                       firstToken.equals("sra") ||
-                       firstToken.equals("srl")) {
-                   Utilidade.binarizer(0, padraoBinario, 0, 5);
-                   Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
-                   Utilidade.binarizer(6, padraoBinario, 0, 10);
-                   Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
-                   Utilidade.binarizer(21, padraoBinario, Integer.parseInt(st.nextToken()), 25);
-                   Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-               } else if (firstToken.equals("div") ||
-                       firstToken.equals("divu") ||
-                       firstToken.equals("mult") ||
-                       firstToken.equals("multu")) {
-                   Utilidade.binarizer(0, padraoBinario, 0, 5);
-                   Utilidade.binarizer(16, padraoBinario, 0, 20);
-                   Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
-                   Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
-                   Utilidade.binarizer(21, padraoBinario, 0, 25);
-                   Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-               } else if (firstToken.equals("mfhi") ||
-                       firstToken.equals("mflo")) {
-                   Utilidade.binarizer(0, padraoBinario, 0, 5);
-                   Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
-                   Utilidade.binarizer(6, padraoBinario, 0, 10);
-                   Utilidade.binarizer(11, padraoBinario, 0, 15);
-                   Utilidade.binarizer(21, padraoBinario, 0, 25);
-                   Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-               } else if (firstToken.equals("mthi") ||
-                       firstToken.equals("mtlo") ||
-                       firstToken.equals("jr")) {
-                   Utilidade.binarizer(0, padraoBinario, 0, 5);
-                   Utilidade.binarizer(16, padraoBinario, 0, 20);
-                   Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
-                   Utilidade.binarizer(11, padraoBinario, 0, 15);
-                   Utilidade.binarizer(21, padraoBinario, 0, 25);
-                   Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-               } else if (firstToken.equals("jalr")) {
-                   Utilidade.binarizer(0, padraoBinario, 0, 5);
-                   Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
-                   Utilidade.binarizer(11, padraoBinario, 0, 15);
-                   Utilidade.binarizer(21, padraoBinario, 0, 25);
-                   Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
-               } else if (firstToken.equals("addi") ||
-                       firstToken.equals("addiu") ||
-                       firstToken.equals("andi") ||
-                       firstToken.equals("ori") ||
-                       firstToken.equals("slti") ||
-                       firstToken.equals("sltiu") ||
-                       firstToken.equals("xori") ||
-                       firstToken.equals("beq") ||
-                       firstToken.equals("bne")) {
-                   Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
-                   Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
-                   Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
-                   Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
-               } else if (firstToken.equals("lw") ||
-                       firstToken.equals("sw")) {
-                   Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
-                   Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
-                   Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
-                   Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
-               } else if (firstToken.equals("lui")) {
-                   Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
-                   Utilidade.binarizer(6, padraoBinario, 0, 10);
-                   Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
-                   Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
-               } else if (firstToken.equals("bgez") ||
-                       firstToken.equals("bgezal") ||
-                       firstToken.equals("bltz") ||
-                       firstToken.equals("bltzal") ||
-                       firstToken.equals("bgtz") ||
-                       firstToken.equals("blez")) {
-                   if (firstToken.equals("bgez"))
-                       Utilidade.binarizer(11, padraoBinario, 1, 15);
-                   else if (firstToken.equals("bgezal"))
-                       Utilidade.binarizer(11, padraoBinario, 17, 15);
-                   else if (firstToken.equals("bltz"))
-                       Utilidade.binarizer(11, padraoBinario, 0, 15);
-                   else if (firstToken.equals("bltzal"))
-                       Utilidade.binarizer(11, padraoBinario, 16, 15);
+            if (firstToken.equals("add") ||
+                    firstToken.equals("addu") ||
+                    firstToken.equals("and") ||
+                    firstToken.equals("or") ||
+                    firstToken.equals("slt") ||
+                    firstToken.equals("sltu") ||
+                    firstToken.equals("sub") ||
+                    firstToken.equals("subu") ||
+                    firstToken.equals("xor")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);//começa a preencher o vetor padrão binario
+                Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);//busca no mapa através da string do token, então pega o valor atribuido e "binariza" no vetor
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if (firstToken.equals("sllv") ||
+                    firstToken.equals("srav") ||
+                    firstToken.equals("srlv")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            }else if (firstToken.equals("sll") ||
+                    firstToken.equals("sra") ||
+                    firstToken.equals("srl")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
+                Utilidade.binarizer(6, padraoBinario, 0, 10);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(21, padraoBinario, Integer.parseInt(st.nextToken()), 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if (firstToken.equals("div") ||
+                    firstToken.equals("divu") ||
+                    firstToken.equals("mult") ||
+                    firstToken.equals("multu")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, 0, 20);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if(firstToken.equals("mfhi") ||
+                    firstToken.equals("mflo")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, map.get(st.nextToken()), 20);
+                Utilidade.binarizer(6, padraoBinario, 0, 10);
+                Utilidade.binarizer(11, padraoBinario, 0, 15);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if(firstToken.equals("mthi") ||
+                    firstToken.equals("mtlo") ||
+                    firstToken.equals("jr")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, 0, 20);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(11, padraoBinario, 0, 15);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if(firstToken.equals("jalr")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(11, padraoBinario, 0, 15);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if(firstToken.equals("addi") ||
+                    firstToken.equals("addiu") ||
+                    firstToken.equals("andi") ||
+                    firstToken.equals("ori") ||
+                    firstToken.equals("slti") ||
+                    firstToken.equals("sltiu") ||
+                    firstToken.equals("xori") ||
+                    firstToken.equals("beq") ||
+                    firstToken.equals("bne")) {
+                Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
+            } else if(firstToken.equals("lw") ||
+                    firstToken.equals("sw")) {
+                Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+            } else if(firstToken.equals("lui") ||
+                    firstToken.equals("li")) {
+                Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
+                Utilidade.binarizer(6, padraoBinario, 0, 10);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
+            } else if(firstToken.equals("bgez") ||
+                    firstToken.equals("bgezal") ||
+                    firstToken.equals("bltz") ||
+                    firstToken.equals("bltzal") ||
+                    firstToken.equals("bgtz") ||
+                    firstToken.equals("blez")) {
+                if(firstToken.equals("bgez"))
+                    Utilidade.binarizer(11, padraoBinario, 1, 15);
+                else if(firstToken.equals("bgezal"))
+                    Utilidade.binarizer(11, padraoBinario, 17, 15);
+                else if(firstToken.equals("bltz"))
+                    Utilidade.binarizer(11, padraoBinario, 0, 15);
+                else if(firstToken.equals("bltzal"))
+                    Utilidade.binarizer(11, padraoBinario, 16, 15);
 
-                   Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
-                   Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
-                   Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
-               } else if (firstToken.equals("j") ||
-                       firstToken.equals("jal")) {
-                   Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
-                   Utilidade.binarizer(6, padraoBinario, Integer.parseInt(st.nextToken()), 31);
-               }
+                Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(16, padraoBinario, Integer.parseInt(st.nextToken()), 31);
+            } else if(firstToken.equals("j") ||
+                    firstToken.equals("jal")) {
+                Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
+                Utilidade.binarizer(6, padraoBinario, Integer.parseInt(st.nextToken()), 31);
+            } else if(firstToken.equals("move")) {
+                Utilidade.binarizer(0, padraoBinario, 0, 5);
+                Utilidade.binarizer(16, padraoBinario, 0, 20);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(21, padraoBinario, 0, 25);
+                Utilidade.binarizer(26, padraoBinario, map.get(firstToken), 31);
+            } else if(firstToken.equals("blt") ||
+                    firstToken.equals("ble") ||
+                    firstToken.equals("bgt") ||
+                    firstToken.equals("bge")) {
+                Utilidade.binarizer(0, padraoBinario, map.get(firstToken), 5);
+                Utilidade.binarizer(6, padraoBinario, map.get(st.nextToken()), 10);
+                Utilidade.binarizer(11, padraoBinario, map.get(st.nextToken()), 15);
+                Utilidade.binarizer(21, padraoBinario, Integer.parseInt(st.nextToken()), 31);
+            }
 
-               palavra = Utilidade.desBinarizerWord(palavra, padraoBinario);//transforma o binario em um inteiro
-               Memoria.memWord.add(palavra);//armazena na memoria, onde será recuperado pelo interpretador
-           }
-       }catch(Exception e){
-           JOptionPane.showMessageDialog(null, "Não foi possível prosseguir com a montagem da palavra, por favor, verifique alguma entrada inválida");
-       }
+            palavra = Utilidade.desBinarizerWord(palavra, padraoBinario);//transforma o binario em um inteiro
+            Memoria.memWord.add(palavra);//armazena na memoria, onde será recuperado pelo interpretador
+        }
     }
 }
