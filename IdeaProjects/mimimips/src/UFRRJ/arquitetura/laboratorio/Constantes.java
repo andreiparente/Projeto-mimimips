@@ -12,5 +12,6 @@ public class Constantes {
     static final int FUNCT_SIZE = 6;
     static final int WORD_SIZE = 32;
     static final int WORD_SIZE_BYTES = 4;
+    static final double MEMVALUE = 268501216;
 
 }
